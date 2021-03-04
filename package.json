@@ -1,6 +1,6 @@
 {
   "name": "react-orcid-auth",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React component to authentificate to orcid",
   "author": "francasix",
   "license": "MIT",
