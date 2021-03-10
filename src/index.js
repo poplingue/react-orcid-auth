@@ -60,7 +60,7 @@ const Auth = ({
   orcidUrl,
   orcidClientId,
   orcidRedirectUri,
-  orcidA24Api
+  crispySniffleApi
 }) => {
   const config = {
     headers: {
@@ -95,7 +95,7 @@ const Auth = ({
     if (orcid) {
       try {
         revoke = await Axios.post(
-          `${orcidA24Api}/orcid/oauth/token/revoke`,
+          `${crispySniffleApi}/orcid/oauth/token/revoke`,
           { token: token.accessToken },
           config
         )
@@ -131,7 +131,7 @@ const Auth = ({
     if (!state.user && token) {
       dispatch({ type: 'SET_MESSAGE', payload: '' })
       try {
-        res = await Axios.post(`${orcidA24Api}/orcid/person`, {
+        res = await Axios.post(`${crispySniffleApi}/orcid/person`, {
           id: token.orcid,
           token: token.accessToken
         })
@@ -139,7 +139,6 @@ const Auth = ({
           dispatch({ type: 'SET_USER', payload: res.data.response })
         }
       } catch (err) {
-        debugger; // eslint-disable-line
         if (err.response.data.error === 'invalid_token') {
           dispatch({
             type: 'SET_MESSAGE',
@@ -160,7 +159,7 @@ const Auth = ({
     if (code) {
       try {
         resp = await Axios.post(
-          `${orcidA24Api}/orcid/oauth/token/code`,
+          `${crispySniffleApi}/orcid/oauth/token/code`,
           { code },
           config
         )
@@ -176,13 +175,8 @@ const Auth = ({
         })
         return resp
       } catch (err) {
-        dispatch({
-          type: 'SET_MESSAGE',
-          payload: err.response.data.error_description
-        })
-        if (err.response.data.error === 'invalid_grant') {
-          history.push(history.location.pathname)
-        }
+        const historyPath = basicCookie.getCookie(cookieHistoryPath)
+        history.push(historyPath)
       }
     }
     return resp
@@ -256,7 +250,6 @@ function useAuthDispatch() {
   return context
 }
 
-// export const AuthContext = createContext(initialUserState);
 export { Auth, useAuthState, useAuthDispatch }
 
 Auth.defaultProps = {
@@ -274,5 +267,5 @@ Auth.propTypes = {
   orcidUrl: PropTypes.string.isRequired,
   orcidClientId: PropTypes.string.isRequired,
   orcidRedirectUri: PropTypes.string.isRequired,
-  orcidA24Api: PropTypes.string.isRequired
+  crispySniffleApi: PropTypes.string.isRequired
 }

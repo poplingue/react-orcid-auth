@@ -3,19 +3,21 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import 'bulma/css/bulma.css'
+
 import { Auth, useAuthDispatch, useAuthState } from 'react-orcid-auth';
 
 const ORCID_URL = '';
 const ORCID_CLIENT_ID = '';
 const ORCID_REDIRECT_URI = '';
-const ORCID_A24_API = '';
+const CRISPY_SNIFFLE_API = '';
 
 const Home = () => {
   const dispatch = useAuthDispatch();
   const state = useAuthState();
   return (
-    <section>
-      <h1>Homepage</h1>
+    <section className="container">
+      <h1>Welcome</h1>
       <article>
         <p>{state.user?.firstName}</p>
         <p>{state.user?.lastName}</p>
@@ -36,7 +38,7 @@ const App = () => {
               orcidUrl={ORCID_URL}
               orcidRedirectUri={ORCID_REDIRECT_URI}
               orcidClientId={ORCID_CLIENT_ID}
-              orcidA24Api={ORCID_A24_API}>
+              crispySniffleApi={CRISPY_SNIFFLE_API}>
           <Home {...props}/>
         </Auth>
       }
@@ -48,7 +50,7 @@ const App = () => {
               orcidUrl={ORCID_URL}
               orcidRedirectUri={ORCID_REDIRECT_URI}
               orcidClientId={ORCID_CLIENT_ID}
-              orcidA24Api={ORCID_A24_API}>
+              crispySniffleApi={CRISPY_SNIFFLE_API}>
           <section>Loading...</section>
         </Auth>
       }
