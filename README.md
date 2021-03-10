@@ -1,6 +1,5 @@
 # react-orcid-auth
-
-> React component to authentificate to orcid
+> React component to authenticate to ORCID and get user infos
 
 [![NPM](https://img.shields.io/npm/v/react-orcid-auth.svg)](https://www.npmjs.com/package/react-orcid-auth) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
