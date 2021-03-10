@@ -14,6 +14,7 @@ yarn add react-orcid-auth
 
 * [react](https://www.npmjs.com/package/react)
 * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+* [Crispy-sniffle](https://github.com/francasix/crispy-sniffle) API project
 
 ## Usage
 
@@ -26,12 +27,19 @@ import {
 
 import { Auth, useAuthDispatch, useAuthState } from 'react-orcid-auth';
 
+// Define your environment variables from your ORCID account and your crispy-sniffle URL
 const ORCID_URL = '';
 const ORCID_CLIENT_ID = '';
 const ORCID_REDIRECT_URI = '';
 const CRISPY_SNIFFLE_API = '';
 
 const App = () => {
+  /* Add parent component <Auth> to the routes where you gonna need ORCID infos
+   * and pass to it environment variables and history as props
+   *
+   * Add redirect route /oauth
+   * and pass to it environment variables and history as props
+   */
   return <Router>
     <Route
       exact
@@ -62,6 +70,10 @@ const App = () => {
 };
 
 const MyComponent = () => {
+  /*
+   * Retrieve state and dispatch methods with useAuthDispatch and useAuthState
+   * Don't forget to pass payload to functions
+   */
   const dispatch = useAuthDispatch();
   const state = useAuthState();
   return (
